@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: Kestrel Servicing API
+  version: 0.1.0
+  description: Partner/servicer REST surface (new Spring work)
+servers:
+  - url: http://localhost:8080
+paths:
+  /loans/{loanId}/payments:
+    post:
+      operationId: applyPayment
+      summary: Apply a payment to a loan
+      parameters:
+        - name: loanId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '202':
+          description: Payment accepted
+components:
+  schemas:
+    PaymentRequest:
+      type: object
+      required: [amountCents, appliedBy]
+      properties:
+        amountCents:
+          type: integer
+          format: int64
+        appliedBy:
+          type: string

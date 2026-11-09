@@ -1,0 +1,14 @@
+---
+description: Conventions for handlers in the Kestrel legacy Java module
+globs: legacy-core/**
+alwaysApply: false
+---
+
+# Kestrel legacy module
+
+- **No Spring** in `legacy-core` (no `@Service`, `@Autowired`, JPA entities).
+- Handlers extend `com.kestrel.framework.KestrelHandler<T>`.
+- Register every handler in `META-INF/kestrel-handlers.xml`.
+- Customer-impacting writes: call `AuditGateway.record` before `KestrelRepository.save`.
+- Mirror structure and naming from `PaymentAppliedHandler`.
+- Unit tests use JUnit 5; run with `mvn test` from `legacy-core/`.
