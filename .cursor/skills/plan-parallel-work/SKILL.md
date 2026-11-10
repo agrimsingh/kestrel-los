@@ -17,5 +17,5 @@ Write a plan that three agents can build at the same time without merge conflict
 
    Give each agent an **Owns** list, a **Contract** and a **Verify** step naming the tests that prove each rule. Owned paths never overlap.
 5. Copy the run order and worker notes from the example: workers run `npm install` in their worktrees, Maven runs offline first, and the UI type check fails until Agent 2's diff is applied.
-6. Save it as `.cursor/plans/<feature>.md`, where `<feature>` is the feature in lowercase singular words joined by hyphens, such as `hardship-deferral.md`. Put the `/multitask @<file>` line at the top.
+6. Save it as `.cursor/plans/<feature>.md`, where `<feature>` is the feature in lowercase singular words joined by hyphens, such as `hardship-deferral.md`. Put the `/multitask @<file> Run each agent in its own worktree.` line at the top.
 7. Summarize the scope decisions and open questions for the user. Do not start building.

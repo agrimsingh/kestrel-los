@@ -3,7 +3,7 @@
 Implements the first slice of the "Hardship deferrals" product brief. Where the brief and this plan disagree, this plan wins until product answers the open questions.
 
 ```
-/multitask @hardship-deferral.md
+/multitask @hardship-deferral.md Run each agent in its own worktree.
 ```
 
 Launch shape is `.cursor/skills/dispatch-subagents/SKILL.md`. The parent chat coordinates and does not implement.
