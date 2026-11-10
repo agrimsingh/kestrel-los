@@ -14,12 +14,12 @@ A servicer can request a hardship deferral on a loan from the servicing desk. Th
 
 ## Run order
 
-1. In one turn, launch Agent 1, Agent 2 and Agent 3 on isolated worktrees. Exactly three implementers.
+1. In one turn, launch Agent 1, Agent 2 and Agent 3, each on its own worktree from `main`. Exactly three implementers. Each worker runs `npm install` in `servicing-ui/` if it needs it, because worktrees start without `node_modules`.
 2. When all three finish, summarize each diff. The owned paths are disjoint, so a conflict means an agent edited a file it does not own: revert that hunk.
 3. Apply in order: legacy, then API, then UI.
-4. Run every suite from the repo root checkout, then launch `kestrel-reviewer` on the combined diff.
+4. From the main checkout, run every module's tests plus `npm run typecheck` and `npm run check:api` in `servicing-ui/`. Then launch `kestrel-reviewer` on the combined diff.
 
-The UI type check fails in Agent 3's worktree until Agent 2's diff is applied, because the generated types come from Agent 2's spec change. That is expected. Agent 3's tests still pass.
+The UI type check fails in Agent 3's worktree until Agent 2's diff is applied, because the generated types come from Agent 2's spec change. That is expected. Agent 3's tests still pass, and the type check passes after step 3.
 
 ## Shared contract (do not fork)
 
@@ -30,14 +30,16 @@ The UI type check fails in Agent 3's worktree until Agent 2's diff is applied, b
 | Field | Type | Rule |
 |---|---|---|
 | `requestedBy` | string | Servicer ID, not blank |
-| `reasonCode` | string enum | `HARDSHIP_MEDICAL`, `HARDSHIP_JOB_LOSS`, `HARDSHIP_DISASTER` |
+| `reasonCode` | string | One of `HARDSHIP_MEDICAL`, `HARDSHIP_JOB_LOSS`, `HARDSHIP_DISASTER` |
 | `months` | integer | 1 to 3 |
 
-**Responses:** `202` accepted, `400` when the body breaks a rule.
+**Responses:** `202` accepted, `400` when the body breaks any rule.
 
-**Legacy payload:** `HardshipDeferralPayload(String loanId, String requestedBy, String reasonCode, int months)`. Audit event type `HARDSHIP_DEFERRAL_REQUESTED`.
+**Legacy payload:** `HardshipDeferralPayload(String loanId, String requestedBy, String reasonCode, int months)`. Audit event type `HARDSHIP_DEFERRAL_REQUESTED`. Persist with `KestrelRepository.save(loanId, "hardshipDeferral", reasonCode + ":" + months)`. The legacy module trusts `loanId`; the API validates it.
 
-**Out of scope for all three:** the payments endpoint, the delinquency Lambda, the README, and `.cursor/`.
+**Out of scope for all three:** the payments endpoint, the delinquency Lambda, the root `README.md`, and `.cursor/`.
+
+Run Maven offline first: `mvn -q -o test`, and drop `-o` only if dependencies are missing.
 
 ---
 
@@ -46,21 +48,21 @@ The UI type check fails in Agent 3's worktree until Agent 2's diff is applied, b
 | | |
 |---|---|
 | **Owns** | `legacy-core/**` only |
-| **Contract** | `HardshipDeferralHandler` and `HardshipDeferralPayload` in `com.kestrel.servicing`, built the way `/add-kestrel-handler` describes. Reject months outside 1 to 3 and unknown reason codes before the audit call. |
-| **Verify** | `mvn -q test` in `legacy-core/`. The test shows the audit call comes before the save, and a 4-month request is rejected with nothing saved. |
+| **Contract** | `HardshipDeferralHandler` and `HardshipDeferralPayload` in `com.kestrel.servicing`, following `.cursor/skills/add-kestrel-handler/SKILL.md`. Check every body rule from the contract before the audit call; a broken rule throws `IllegalArgumentException`, and nothing is audited or saved. |
+| **Verify** | Maven tests in `legacy-core/`. A valid request is audited and saved, and a 4-month request, an unknown reason code and a blank servicer ID each throw with nothing saved. |
 
 ### Agent 2 - API contract and endpoint
 
 | | |
 |---|---|
-| **Owns** | `contracts/openapi.yaml`, `servicing-api/**`, and `servicing-ui/src/api/schema.d.ts` (regenerated, never hand-edited) |
-| **Contract** | Add the operation and `DeferralRequest` schema to the spec first. Then add a controller, service and request type under `com.kestrel.api.deferrals`, mirroring the payments package, with bean validation for the rules. Add `DeferralsContractTest` next to `PaymentsContractTest`. Regenerate the UI types with `npm run generate:api` in `servicing-ui/` (run `npm install` first if `node_modules` is missing). |
-| **Verify** | `mvn -q test` in `servicing-api/`. A valid body returns 202, `months: 4` returns 400. `npm run check:api` passes in `servicing-ui/`. |
+| **Owns** | `contracts/openapi.yaml`, `servicing-api/**` (including its README), and `servicing-ui/src/api/schema.d.ts` (regenerated, never hand-edited) |
+| **Contract** | Change the spec first: add the operation with `202` and `400` responses and the `DeferralRequest` schema, with every rule expressed in it (`enum`, `minimum: 1`, `maximum: 3`, `minLength: 1`). Then add a controller, service and request record under `com.kestrel.api.deferrals`, mirroring the payments package. Keep `reasonCode` a `String` validated with `@Pattern`, to match the legacy payload. Add `DeferralsContractTest` next to `PaymentsContractTest` and `DeferralControllerTest` next to `PaymentControllerTest`. Regenerate the UI types with `npm run generate:api` in `servicing-ui/`. |
+| **Verify** | Maven tests in `servicing-api/`: a valid body returns 202, and `months: 4`, an unknown `reasonCode` and a blank `requestedBy` each return 400. `npm run check:api` passes in `servicing-ui/`. |
 
 ### Agent 3 - servicer UI form
 
 | | |
 |---|---|
-| **Owns** | `servicing-ui/src/deferrals/**` and `servicing-ui/src/App.tsx` |
-| **Contract** | `RequestDeferralForm` next to the payment form, consistent with `ApplyPaymentForm`: same `card`, `field`, `button` and `notice` classes, no new CSS. Reason code is a select, months is 1 to 3. Call `api.POST("/loans/{loanId}/deferrals", ...)` through the existing client. Do not edit `src/api/`. |
-| **Verify** | `npm test` in `servicing-ui/` (run `npm install` first if `node_modules` is missing), with a test that a valid request posts the contract body and a missing servicer ID shows an error. |
+| **Owns** | `servicing-ui/src/deferrals/**`, `servicing-ui/src/App.tsx`, and one change to `servicing-ui/src/index.css`: add `.field select` alongside the existing `.field input` selectors |
+| **Contract** | `RequestDeferralForm`, rendered as a third card in `.panels`, consistent with `ApplyPaymentForm`: same `card`, `field`, `button` and `notice` classes. Labels are "Requested by", "Reason" and "Months", with ids that do not clash with the payment form's. Reason is a `<select>` of the three codes, written as a list in the form. Months is a text input that accepts only 1, 2 or 3, checked before any API call. Call `api.POST("/loans/{loanId}/deferrals", ...)` through the existing client and do not edit `src/api/`. Deferrals do not appear in the activity list. |
+| **Verify** | `npm test` in `servicing-ui/`, with tests that a valid request posts the contract body, a blank servicer ID shows an error without calling the API, and `months: 4` is blocked. |
