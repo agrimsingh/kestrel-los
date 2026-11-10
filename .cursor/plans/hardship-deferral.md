@@ -1,6 +1,6 @@
 # Hardship deferral requests - three parallel agents
 
-Tracks GitHub issue "Servicers can request a hardship deferral".
+Implements the first slice of the "Hardship deferrals" product brief. Where the brief and this plan disagree, this plan wins until product answers the open questions.
 
 ```
 /multitask @hardship-deferral.md
