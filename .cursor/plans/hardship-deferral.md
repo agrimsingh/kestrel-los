@@ -10,7 +10,7 @@ Launch shape is `.cursor/skills/dispatch-subagents/SKILL.md`. The parent chat co
 
 ## Goal
 
-A servicer can request a hardship deferral on a loan from the servicing desk. The API accepts it, and the legacy module records it with an audit entry.
+A servicer can request a hardship deferral on a loan from the servicing desk, and the API accepts it. The legacy module gets a handler that records a deferral with an audit entry. Connecting the API to that handler is a later change, as it is for payments.
 
 ## Run order
 
