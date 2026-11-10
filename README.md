@@ -86,12 +86,72 @@ is the reference handler. [docs/architecture.md](docs/architecture.md) has the w
 | [`.cursor/skills/add-kestrel-handler/SKILL.md`](.cursor/skills/add-kestrel-handler/SKILL.md) | Project skill for the repeatable job of adding a handler. Run it with `/add-kestrel-handler`. |
 | [`.cursor/BUGBOT.md`](.cursor/BUGBOT.md) | Review guidance for Bugbot on pull requests. Bugbot reads it from the pull request's base branch. |
 | [`.cursor/skills/stage-demo/SKILL.md`](.cursor/skills/stage-demo/SKILL.md) | Presenter skill. Creates a fresh "Hardship deferrals - product brief" Google Doc for the MCP beat, using the Google Workspace plugin. |
-| [`.cursor/skills/reset-demo-state/SKILL.md`](.cursor/skills/reset-demo-state/SKILL.md) | Presenter skill. Closes demo PRs, deletes demo branches and issues, and lists the manual cleanup. |
+| [`.cursor/skills/reset-demo-state/SKILL.md`](.cursor/skills/reset-demo-state/SKILL.md) | Presenter skill. Undoes the workshop's changes, removes worktrees, closes demo PRs, deletes demo branches and trashes the staged brief. |
 | [`.cursor/skills/plan-parallel-work/SKILL.md`](.cursor/skills/plan-parallel-work/SKILL.md) | Turns a brief into a plan in `.cursor/plans` that `/multitask` can run across three agents. Its `example.md` is a plan that built and merged cleanly. |
 | [`.cursor/skills/dispatch-subagents/SKILL.md`](.cursor/skills/dispatch-subagents/SKILL.md) | How the coordinator launches parallel agents and merges their work. |
 Open the rule file first. It is six bullets long, which is about the right size.
 
-## Things to try
+## Workshop prompts
+
+These are the prompts from the Cursor 201 workshop, in order. Start a new chat for each step.
+
+1. **Target context.** In one chat, ask about everything. In a second chat, ask about one workflow, then reuse the first chat with `@`.
+
+   ```
+   /ask What is the domain driven design of the application?
+   ```
+
+   ```
+   /ask How does the legacy module record a payment, and what does it audit?
+   ```
+
+   ```
+   /ask @<first chat> If we add hardship deferrals, what else in the system has to change?
+   ```
+
+2. **Turn instructions into a skill.**
+
+   ```
+   /create-skill for how to create a new API. Follow the standards in this repo. This is a personal skill named create-api, saved in ~/.cursor/skills. Use it whenever someone adds an endpoint.
+   ```
+
+   ```
+   Move the create-api skill into this project and remove my personal copy.
+   ```
+
+3. **Read a product brief through MCP.** With the Google Drive and Google Docs plugins connected, run `/stage-demo` to put the brief in your Drive. Without them, paste the text of [`brief.md`](.cursor/skills/stage-demo/brief.md) into the chat instead.
+
+   ```
+   Find the hardship deferrals product brief in our Drive and tell me what it asks for.
+   ```
+
+   ```
+   Check the brief against our code and docs. Add one comment to the doc with the three biggest gaps.
+   ```
+
+4. **Plan the work for three agents.**
+
+   ```
+   Turn the hardship deferrals brief into a plan for three agents building it in parallel.
+   ```
+
+5. **Create a reviewer, then build in parallel.** Subagents share your checkout unless you ask for worktrees.
+
+   ```
+   /create-subagent Create a project subagent named kestrel-reviewer. It reviews changes in this repo and never edits files. It runs the tests for every module that changed, checks our legacy framework rule, checks that API changes start from the OpenAPI contract, and checks our logging standard in docs. It reports what passed and what didn't, with test counts.
+   ```
+
+   ```
+   /multitask @hardship-deferral.md Run each agent in its own worktree.
+   ```
+
+6. **Review the result.**
+
+   ```
+   kestrel-reviewer check my work, and audit the whole repo against our logging standard.
+   ```
+
+## More to try on your own
 
 Start a new chat for each one. The prompts are examples of intent, not scripts. Say them in
 your own words, typed or by voice. You should not need to name files or tag them: the rule
