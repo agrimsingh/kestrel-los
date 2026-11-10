@@ -26,7 +26,7 @@ FIXTURE_ROWS = [
 
 
 def export_csv(rows: Iterable[dict] | None = None) -> str:
-    rows = list(rows or FIXTURE_ROWS)
+    rows = list(FIXTURE_ROWS if rows is None else rows)
     buf = io.StringIO()
     writer = csv.DictWriter(
         buf,
