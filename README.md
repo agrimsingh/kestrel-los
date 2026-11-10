@@ -17,7 +17,7 @@ reference handler and a skill fix that.
 | `servicing-api/` | Spring Boot service that implements the contract. | The one endpoint, a controller test and a contract test |
 | `servicing-ui/` | React UI that consumes the contract through a generated client. | A servicing desk: loan queue, apply-payment form and tests |
 | `lambdas/export_delinquency_report/` | Python Lambda that exports a delinquency CSV for reporting. | Handler and a test |
-| `docs/` | `architecture.md` and `compliance-logging.md`. | |
+| `docs/` | `architecture.md`, `compliance-logging.md` and `servicing-policy.md`. | |
 | `.cursor/` | Project rule, skill and Bugbot guidance. | |
 
 To follow along, click **Use this template** on GitHub to make your own copy, then clone it.

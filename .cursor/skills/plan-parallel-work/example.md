@@ -14,7 +14,7 @@ A servicer can request a hardship deferral on a loan from the servicing desk, an
 
 ## Open questions
 
-- The brief allows 1 to 6 months. This plan caps a deferral at 3 until product confirms.
+- The brief allows 1 to 6 months, but `docs/servicing-policy.md` caps a deferral at 3. This plan follows the policy until product and Loan Operations agree.
 - The brief asks for a borrower email. Nothing in the stack sends email, so it is left for later.
 - The brief wants the loan summary to show an active deferral. There is no endpoint to read deferrals back yet, so it is left for later.
 

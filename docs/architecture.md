@@ -30,4 +30,5 @@ Handlers are not Spring beans. The pattern:
 ## Cross-cutting
 
 - Never log full loan numbers. See [compliance-logging.md](compliance-logging.md).
+- Business rules from Loan Operations are in [servicing-policy.md](servicing-policy.md).
 - Every OpenAPI change needs a contract test under `servicing-api/src/test/contract/`.

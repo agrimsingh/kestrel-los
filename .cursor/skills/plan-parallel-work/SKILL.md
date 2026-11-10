@@ -7,7 +7,7 @@ description: Turn a product brief or feature request into a plan in .cursor/plan
 
 Write a plan that three agents can build at the same time without merge conflicts. [example.md](example.md) is a plan that built and merged cleanly. Keep its structure and level of detail.
 
-1. Read the brief. If the user names a document rather than a file, find it in Google Drive. Then read the code it touches: `contracts/openapi.yaml`, `PaymentAppliedHandler`, the `com.kestrel.api.payments` package and `servicing-ui/src/payments/`.
+1. Read the brief. If the user names a document rather than a file, find it in Google Drive. Then read `docs/servicing-policy.md` and the code the brief touches: `contracts/openapi.yaml`, `PaymentAppliedHandler`, the `com.kestrel.api.payments` package and `servicing-ui/src/payments/`.
 2. Decide the scope. Build what the brief asks that the stack supports today. Where the brief conflicts with existing code or rules, or leaves a question open, take the narrower option and list it under **Open questions**. Leave anything with no home in the stack yet, such as email or new read endpoints, for later, and list it too.
 3. Write the shared contract once: HTTP path and `operationId`, body fields with types and rules, responses, the legacy payload, audit event type and save key. Every agent builds to it, and no agent changes it.
 4. Split by layer:
