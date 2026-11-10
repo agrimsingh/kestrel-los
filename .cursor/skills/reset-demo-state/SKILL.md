@@ -1,0 +1,21 @@
+---
+name: reset-demo-state
+description: Return the repo and its GitHub Issues to the pre-demo state after a run of the workshop.
+---
+
+# Reset the demo state
+
+1. Run `git status`. List what changed and ask before discarding anything. Demo beats leave:
+   - Hardship deferral files from `/multitask @hardship-deferral.md`: `legacy-core/**/HardshipDeferral*`, `servicing-api/**/deferrals/`, `servicing-ui/src/deferrals/`, plus edits to `kestrel-handlers.xml`, `contracts/openapi.yaml`, `servicing-ui/src/api/schema.d.ts` and `servicing-ui/src/App.tsx`.
+   - A `create-api` skill in `.cursor/skills/` from the skills beat.
+   Once confirmed, restore tracked files with `git restore .` and delete only those untracked paths.
+2. Remove linked worktrees left by parallel agents: `git worktree list`, then `git worktree remove --force <path>` for each one that is not the main checkout, then `git worktree prune`.
+3. Close every open pull request whose head branch starts with `demo/`, deleting the branch: `gh pr close <number> --delete-branch`.
+4. Switch to `main` and delete local `demo/*` branches and branches left by the removed worktrees with `git branch -D`. Never delete `main`.
+5. Delete the open or closed issues whose titles are in `presenter/github-issues.md` with `gh issue delete <number> --yes`, so the next `/stage-github` starts from clean issues with no old comments. Never delete an issue whose title is not in the catalog.
+6. If `~/.cursor/skills/create-api` exists, ask, then remove it.
+7. Report what was removed, then remind the presenter to do these by hand:
+   - Remove the "Standard bug fix" plugin in Customize > Plugins.
+   - Close the demo chats.
+   - Stop the API and UI servers.
+   - Run `/stage-github` before the next run.

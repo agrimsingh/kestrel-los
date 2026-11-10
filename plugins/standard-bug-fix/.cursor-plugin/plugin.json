@@ -1,0 +1,23 @@
+{
+  "name": "standard-bug-fix",
+  "displayName": "Standard bug fix",
+  "version": "1.0.0",
+  "description": "Standard GitHub Issues bug-fix skill, rule, and GitHub MCP for Kestrel LOS.",
+  "author": {
+    "name": "Kestrel Home Loans Servicing Platform",
+    "email": "servicing-platform@kestrel.example"
+  },
+  "keywords": ["github", "issues", "bug-fix", "mcp", "kestrel"],
+  "variables": {
+    "type": "object",
+    "properties": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": {
+        "type": "string",
+        "title": "GitHub personal access token",
+        "description": "Token from https://github.com/settings/tokens with access to this repository's issues and pull requests."
+      }
+    },
+    "required": ["GITHUB_PERSONAL_ACCESS_TOKEN"]
+  },
+  "mcpServers": "./mcp.json"
+}
