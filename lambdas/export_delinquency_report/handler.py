@@ -34,6 +34,10 @@ def export_csv(rows: Iterable[dict] | None = None) -> str:
     )
     writer.writeheader()
     for row in rows:
-        logger.debug("Exporting delinquency row for loan_number=%s", row["loan_number"])
+        logger.debug(
+            "Exporting delinquency row for loanId=%s loan_number_last4=%s",
+            row["loan_id"],
+            str(row["loan_number"])[-4:],
+        )
         writer.writerow(row)
     return buf.getvalue()
