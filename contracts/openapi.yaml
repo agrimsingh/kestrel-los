@@ -26,6 +26,8 @@ paths:
       responses:
         '202':
           description: Payment accepted
+        '400':
+          description: Request failed validation
 components:
   schemas:
     PaymentRequest:
@@ -35,5 +37,7 @@ components:
         amountCents:
           type: integer
           format: int64
+          minimum: 1
         appliedBy:
           type: string
+          minLength: 1

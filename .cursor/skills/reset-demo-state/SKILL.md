@@ -13,7 +13,7 @@ description: Return the repo and its GitHub Issues to the pre-demo state after a
 3. Close every open pull request whose head branch starts with `demo/`, deleting the branch: `gh pr close <number> --delete-branch`.
 4. Switch to `main` and delete local `demo/*` branches and branches left by the removed worktrees with `git branch -D`. Never delete `main`.
 5. Delete the open or closed issues whose titles are in `presenter/github-issues.md` with `gh issue delete <number> --yes`, so the next `/stage-github` starts from clean issues with no old comments. Never delete an issue whose title is not in the catalog.
-6. If `~/.cursor/skills/create-api` exists, ask, then remove it.
+6. Look for a personal `create-api` skill in `~/.cursor/skills/create-api` and in `~/Library/Application Support/Cursor/AgentStores/*/files/skills/create-api`. If one exists, ask, then remove it.
 7. Report what was removed, then remind the presenter to do these by hand:
    - Remove the "Standard bug fix" plugin in Customize > Plugins.
    - Close the demo chats.

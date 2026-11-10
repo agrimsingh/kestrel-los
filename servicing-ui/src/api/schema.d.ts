@@ -61,6 +61,13 @@ export interface operations {
                 };
                 content?: never;
             };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
     };
 }

@@ -47,6 +47,20 @@ cd servicing-ui && npm test
 cd lambdas/export_delinquency_report && python3 -m pytest -q
 ```
 
+## Run the app
+
+Start the API, then the UI, in two terminals:
+
+```bash
+cd servicing-api && mvn spring-boot:run
+```
+
+```bash
+cd servicing-ui && npm run dev
+```
+
+Open http://localhost:5173. The UI proxies `/loans` to the API on port 8080.
+
 ## The Kestrel framework in one minute
 
 Handlers in `legacy-core` are not Spring beans. Every handler:

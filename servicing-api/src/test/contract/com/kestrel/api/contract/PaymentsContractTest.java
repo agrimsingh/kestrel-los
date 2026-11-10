@@ -31,7 +31,18 @@ class PaymentsContractTest {
     assertNotNull(operation, "spec is missing POST " + PATH);
     assertEquals("applyPayment", operation.get("operationId"));
     assertTrue(OpenApiSpec.child(operation, "responses").containsKey("202"));
+    assertTrue(OpenApiSpec.child(operation, "responses").containsKey("400"));
     assertEquals(List.of("amountCents", "appliedBy"), spec.requiredProperties("PaymentRequest"));
+  }
+
+  @Test
+  void apiRejectsAmountBelowSpecMinimum() throws Exception {
+    mockMvc
+        .perform(
+            post(PATH, UUID.randomUUID())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"amountCents\": 0, \"appliedBy\": \"agent-42\"}"))
+        .andExpect(status().isBadRequest());
   }
 
   @Test

@@ -15,7 +15,7 @@ Do not accept claims at face value.
    - `servicing-api/`: same as `legacy-core/`
    - `servicing-ui/`: `npm test`, `npm run typecheck` and `npm run check:api`
    - `lambdas/export_delinquency_report/`: `python3 -m pytest -q`
-   Quote Maven test counts from `target/surefire-reports/*.txt`, because `-q` prints nothing on a pass.
+   Quote Maven test counts from `target/surefire-reports/*.txt`, because `-q` output does not reliably include a summary.
 4. Apply the checklist.
 
 Checklist:
