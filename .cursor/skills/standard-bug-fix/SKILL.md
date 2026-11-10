@@ -5,11 +5,11 @@ description: Pull one bug from this repo's GitHub Issues by title or number, fix
 
 # Standard bug fix
 
-Work one GitHub issue on this repository and keep the issue current as you go. Follow this plugin's `standard-bug-fix` rule.
+Work one GitHub issue on this repository and keep the issue current as you go. Follow the project's `standard-bug-fix` rule.
 
 ## GitHub access
 
-Use the GitHub MCP server this plugin ships. If its tools are unavailable, say so once and continue with the `gh` CLI for the same steps. Do not stop to wait for a token. Pushing a branch always uses local `git`.
+Use the GitHub MCP tools. If its tools are unavailable, say so once and continue with the `gh` CLI for the same steps. Do not stop to wait for a token. Pushing a branch always uses local `git`.
 
 If the repo has no open issues, tell the user to run `/stage-github`.
 

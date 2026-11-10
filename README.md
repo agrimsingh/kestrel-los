@@ -26,6 +26,7 @@ reference handler and a skill fix that.
 - JDK 17 and Maven 3.9 or later (`brew install maven` on macOS)
 - Python 3.9 or later, with pytest (`python3 -m pip install pytest`)
 - Node.js 22.22 or later, then `cd servicing-ui && npm install`
+- For the GitHub beat: `brew install gh github-mcp-server`, then `gh auth login`
 
 There is no database. Everything runs on in-memory fixtures.
 
@@ -83,7 +84,8 @@ is the reference handler. [docs/architecture.md](docs/architecture.md) has the w
 | [`.cursor/BUGBOT.md`](.cursor/BUGBOT.md) | Review guidance for Bugbot on pull requests. Bugbot reads it from the pull request's base branch. |
 | [`.cursor/skills/stage-github/SKILL.md`](.cursor/skills/stage-github/SKILL.md) | Presenter skill. Creates the demo issues in [`presenter/github-issues.md`](presenter/github-issues.md) on this repo's GitHub Issues. |
 | [`.cursor/skills/reset-demo-state/SKILL.md`](.cursor/skills/reset-demo-state/SKILL.md) | Presenter skill. Closes demo PRs, deletes demo branches and issues, and lists the manual cleanup. |
-| [`plugins/standard-bug-fix/`](plugins/standard-bug-fix/README.md) | Team plugin for the MCP beat: a bug-fix skill, a rule and the GitHub MCP server. Add it from Customize > Plugins > Add > From GitHub Repository with `agrimsingh/kestrel-los`. |
+| [`.cursor/mcp.json`](.cursor/mcp.json) | GitHub's MCP server, run locally on your `gh` login, so no token or Marketplace plugin is needed. |
+| [`.cursor/skills/standard-bug-fix/SKILL.md`](.cursor/skills/standard-bug-fix/SKILL.md) and [`.cursor/rules/standard-bug-fix.mdc`](.cursor/rules/standard-bug-fix.mdc) | Bug-fix workflow for the plugin beat: claim a GitHub issue, comment as you go, fix it with a test and open a pull request that closes it. |
 | [`.cursor/plans/hardship-deferral.md`](.cursor/plans/hardship-deferral.md) | Plan for the parallel beat. Splits hardship deferrals across three agents. Run it with `/multitask @hardship-deferral.md`. |
 | [`.cursor/skills/dispatch-subagents/SKILL.md`](.cursor/skills/dispatch-subagents/SKILL.md) | How the coordinator launches parallel agents and merges their work. |
 | [`.cursor/agents/kestrel-reviewer.md`](.cursor/agents/kestrel-reviewer.md) | Read-only reviewer subagent that runs the tests and checks the repo's rules. |

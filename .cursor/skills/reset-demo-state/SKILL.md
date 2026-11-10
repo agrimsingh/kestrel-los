@@ -15,7 +15,6 @@ description: Return the repo and its GitHub Issues to the pre-demo state after a
 5. Delete the open or closed issues whose titles are in `presenter/github-issues.md` with `gh issue delete <number> --yes`, so the next `/stage-github` starts from clean issues with no old comments. Never delete an issue whose title is not in the catalog.
 6. Look for a personal `create-api` skill in `~/.cursor/skills/create-api` and in `~/Library/Application Support/Cursor/AgentStores/*/files/skills/create-api`. If one exists, ask, then remove it.
 7. Report what was removed, then remind the presenter to do these by hand:
-   - Remove the "Standard bug fix" plugin in Customize > Plugins.
    - Close the demo chats.
    - Stop the API and UI servers.
    - Run `/stage-github` before the next run.
