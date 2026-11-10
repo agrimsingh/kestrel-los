@@ -13,7 +13,7 @@ Each subagent starts with clean context and cannot see this chat, so its prompt 
 2. In one turn, launch one subagent per piece, each on its own worktree. The first launches are the named workers. Never launch a single wrapper subagent to "implement the plan".
 3. Put each worker's owned paths, the shared contract, what is out of scope, and its verify step in its prompt.
 4. Wait for every worker, then apply their diffs from the main checkout in the plan's order.
-5. Run the tests, then launch `kestrel-reviewer` on the combined diff.
+5. Run the tests. If the project has a `kestrel-reviewer` subagent, launch it on the combined diff.
 
 ## Conflicts
 

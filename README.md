@@ -89,8 +89,6 @@ is the reference handler. [docs/architecture.md](docs/architecture.md) has the w
 | [`.cursor/skills/reset-demo-state/SKILL.md`](.cursor/skills/reset-demo-state/SKILL.md) | Presenter skill. Closes demo PRs, deletes demo branches and issues, and lists the manual cleanup. |
 | [`.cursor/skills/plan-parallel-work/SKILL.md`](.cursor/skills/plan-parallel-work/SKILL.md) | Turns a brief into a plan in `.cursor/plans` that `/multitask` can run across three agents. Its `example.md` is a plan that built and merged cleanly. |
 | [`.cursor/skills/dispatch-subagents/SKILL.md`](.cursor/skills/dispatch-subagents/SKILL.md) | How the coordinator launches parallel agents and merges their work. |
-| [`.cursor/agents/kestrel-reviewer.md`](.cursor/agents/kestrel-reviewer.md) | Read-only reviewer subagent that runs the tests and checks the repo's rules. |
-
 Open the rule file first. It is six bullets long, which is about the right size.
 
 ## Things to try

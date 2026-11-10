@@ -23,7 +23,7 @@ A servicer can request a hardship deferral on a loan from the servicing desk, an
 1. In one turn, launch Agent 1, Agent 2 and Agent 3, each on its own worktree from `main`. Exactly three implementers. Each worker runs `npm install` in `servicing-ui/` if it needs it, because worktrees start without `node_modules`.
 2. When all three finish, summarize each diff. The owned paths are disjoint, so a conflict means an agent edited a file it does not own: revert that hunk.
 3. Apply in order: legacy, then API, then UI.
-4. From the main checkout, run every module's tests plus `npm run typecheck` and `npm run check:api` in `servicing-ui/`. Then launch `kestrel-reviewer` on the combined diff.
+4. From the main checkout, run every module's tests plus `npm run typecheck` and `npm run check:api` in `servicing-ui/`. Then launch the `kestrel-reviewer` subagent on the combined diff, if the project has one.
 
 The UI type check fails in Agent 3's worktree until Agent 2's diff is applied, because the generated types come from Agent 2's spec change. That is expected. Agent 3's tests still pass, and the type check passes after step 3.
 
