@@ -20,6 +20,8 @@ reference handler and a skill fix that.
 | `docs/` | `architecture.md` and `compliance-logging.md`. | |
 | `.cursor/` | Project rule, skill and Bugbot guidance. | |
 
+To follow along, click **Use this template** on GitHub to make your own copy, then clone it.
+
 ## Prerequisites
 
 - Cursor
