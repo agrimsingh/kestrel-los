@@ -1,17 +1,18 @@
 {
-  "name": "kestrel-standard-bug-fix",
+  "name": "kestrel-los",
   "owner": {
     "name": "Kestrel Home Loans Servicing Platform",
     "email": "servicing-platform@kestrel.example"
   },
   "metadata": {
-    "description": "Local plugin for the 201 track: standard-bug-fix skill, rule, and GitHub MCP.",
-    "version": "1.0.0"
+    "description": "Team plugins for Kestrel LOS.",
+    "version": "1.0.0",
+    "pluginRoot": "plugins"
   },
   "plugins": [
     {
       "name": "standard-bug-fix",
-      "source": "./",
+      "source": "standard-bug-fix",
       "description": "Skill, rule, and GitHub MCP for fixing a bug from GitHub Issues with a standard write-up."
     }
   ]

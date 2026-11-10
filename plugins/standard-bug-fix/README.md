@@ -1,6 +1,6 @@
 # Standard bug fix
 
-A local plugin for the MCP beat of the 201 track. Add it from **Customize > Plugins > Add > From Local Repository** and choose this directory.
+A team plugin for the MCP beat of the 201 track. Add it from **Customize > Plugins > Add > From GitHub Repository** with `agrimsingh/kestrel-los`. The repo's `.cursor-plugin/marketplace.json` lists it.
 
 It ships:
 

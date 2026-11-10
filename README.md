@@ -83,7 +83,7 @@ is the reference handler. [docs/architecture.md](docs/architecture.md) has the w
 | [`.cursor/BUGBOT.md`](.cursor/BUGBOT.md) | Review guidance for Bugbot on pull requests. Bugbot reads it from the pull request's base branch. |
 | [`.cursor/skills/stage-github/SKILL.md`](.cursor/skills/stage-github/SKILL.md) | Presenter skill. Creates the demo issues in [`presenter/github-issues.md`](presenter/github-issues.md) on this repo's GitHub Issues. |
 | [`.cursor/skills/reset-demo-state/SKILL.md`](.cursor/skills/reset-demo-state/SKILL.md) | Presenter skill. Closes demo PRs, deletes demo branches and issues, and lists the manual cleanup. |
-| [`plugins/standard-bug-fix/`](plugins/standard-bug-fix/README.md) | Local plugin for the MCP beat: a bug-fix skill, a rule and the GitHub MCP server. Add it from Customize > Plugins. |
+| [`plugins/standard-bug-fix/`](plugins/standard-bug-fix/README.md) | Team plugin for the MCP beat: a bug-fix skill, a rule and the GitHub MCP server. Add it from Customize > Plugins > Add > From GitHub Repository with `agrimsingh/kestrel-los`. |
 | [`.cursor/plans/hardship-deferral.md`](.cursor/plans/hardship-deferral.md) | Plan for the parallel beat. Splits hardship deferrals across three agents. Run it with `/multitask @hardship-deferral.md`. |
 | [`.cursor/skills/dispatch-subagents/SKILL.md`](.cursor/skills/dispatch-subagents/SKILL.md) | How the coordinator launches parallel agents and merges their work. |
 | [`.cursor/agents/kestrel-reviewer.md`](.cursor/agents/kestrel-reviewer.md) | Read-only reviewer subagent that runs the tests and checks the repo's rules. |
