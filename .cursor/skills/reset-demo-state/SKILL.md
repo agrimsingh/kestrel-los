@@ -7,6 +7,7 @@ description: Return the repo, its demo branches and the Google Drive brief to th
 
 1. Run `git status`. List what changed and ask before discarding anything. Demo beats leave:
    - Hardship deferral files from `/multitask @hardship-deferral.md`: `legacy-core/**/HardshipDeferral*`, `servicing-api/**/deferrals/`, `servicing-ui/src/deferrals/`, plus edits to `kestrel-handlers.xml`, `contracts/openapi.yaml`, `servicing-ui/src/api/schema.d.ts` and `servicing-ui/src/App.tsx`.
+   - The plan the agent wrote in `.cursor/plans/`.
    - The logging fix from the review beat: edits under `lambdas/export_delinquency_report/`.
    - A `create-api` skill in `.cursor/skills/` from the skills beat.
    Once confirmed, restore tracked files with `git restore .` and delete only those untracked paths.

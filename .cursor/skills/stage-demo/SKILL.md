@@ -11,4 +11,4 @@ Uses the Google Drive tools from the Google Workspace plugin.
 2. Create a Google Doc titled `Hardship deferrals - product brief` from [brief.md](brief.md) in this skill's folder: Markdown content, converted to a Google Doc.
 3. Report the doc's link.
 
-The brief disagrees with `.cursor/plans/hardship-deferral.md` on purpose, so the agent has gaps to comment on: it allows up to six months instead of three, asks for a borrower email, and wants the loan summary to show an active deferral. Do not edit the brief to match the plan.
+The brief disagrees with the repo on purpose, so the agent has gaps to comment on and open questions to plan around: it allows up to six months instead of three, asks for a borrower email, and wants the loan summary to show an active deferral. Do not edit the brief to match the plan.

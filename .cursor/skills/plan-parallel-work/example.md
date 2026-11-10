@@ -12,6 +12,12 @@ Launch shape is `.cursor/skills/dispatch-subagents/SKILL.md`. The parent chat co
 
 A servicer can request a hardship deferral on a loan from the servicing desk, and the API accepts it. The legacy module gets a handler that records a deferral with an audit entry. Connecting the API to that handler is a later change, as it is for payments.
 
+## Open questions
+
+- The brief allows 1 to 6 months. This plan caps a deferral at 3 until product confirms.
+- The brief asks for a borrower email. Nothing in the stack sends email, so it is left for later.
+- The brief wants the loan summary to show an active deferral. There is no endpoint to read deferrals back yet, so it is left for later.
+
 ## Run order
 
 1. In one turn, launch Agent 1, Agent 2 and Agent 3, each on its own worktree from `main`. Exactly three implementers. Each worker runs `npm install` in `servicing-ui/` if it needs it, because worktrees start without `node_modules`.
